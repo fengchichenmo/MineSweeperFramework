@@ -44,6 +44,7 @@ public class ChessBoardModelImpl extends BaseModel implements ChessBoardModelSer
 	public boolean excavate(int x, int y) {
 		// TODO Auto-generated method stub
 		/********************简单示例挖开方法，待完善********************/
+		
 		if(blockMatrix == null)
 			return false;
 		
@@ -95,8 +96,48 @@ public class ChessBoardModelImpl extends BaseModel implements ChessBoardModelSer
 	public boolean quickExcavate(int x, int y) {
 		// TODO Auto-generated method stub
 		/***********请在此处完成快速挖开方法实现****************/
+		if(blockMatrix == null)
+			return false;
+		//记录需要挖开的方块
+		List<BlockPO> blocks = new ArrayList<BlockPO>();
+		BlockPO block = blockMatrix[x][y];
 		
-		return false;
+		//只有点击已经被挖开的方块才能触发快速挖开功能
+		if(block.getState() != BlockState.CLICK)
+			return false;
+		
+		int width = blockMatrix.length;
+		int height = blockMatrix[0].length;
+		
+		int tempI = x-1;		
+		int flagNum = 0;//改方块周围被被标记的雷数
+		for(;tempI<=x+1;tempI++){
+			int tempJ = y-1;
+			for(;tempJ<=y+1;tempJ++){
+				if((tempI>-1&&tempI<width)&&(tempJ>-1&&tempJ<height)){
+//					System.out.println(i+";"+j+":"+tempI+";"+tempJ+":");
+					if(blockMatrix[tempI][tempJ].getState() == BlockState.FLAG);
+					{
+						flagNum++;
+					}
+					if(blockMatrix[tempI][tempJ].getState() == BlockState.UNCLICK)
+					{
+						blocks.add(blockMatrix[tempI][tempJ]);
+					}
+				}
+			}
+		}
+		if(flagNum == block.getMineNum())
+		{
+			super.updateChange(new UpdateMessage("excute",this.getDisplayList(blocks, GameState.RUN)));
+			return true;
+		}
+		else
+		{
+			blocks.clear();
+			return false;
+		}
+		
 	}
 
 	/**
@@ -113,7 +154,7 @@ public class ChessBoardModelImpl extends BaseModel implements ChessBoardModelSer
 		
 		int index = 0;
 		
-		//初始化及布雷
+		//初始化
 		for(int i = 0 ; i<width; i++){
 			for (int j = 0 ; j< height; j++){
 				blockMatrix[i][j] = new BlockPO(i,j);
@@ -128,7 +169,7 @@ public class ChessBoardModelImpl extends BaseModel implements ChessBoardModelSer
 			if(!blockMatrix[i][j].isMine())
 			{
 				blockMatrix[i][j].setMine(true);
-				blockMatrix[i][j].addMine();
+				addMineNum(i, j);
 				mineNum--;
 			}
 		}
