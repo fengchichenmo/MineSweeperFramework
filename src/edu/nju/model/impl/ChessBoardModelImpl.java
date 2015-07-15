@@ -2,7 +2,6 @@ package edu.nju.model.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import edu.nju.model.po.BlockPO;
 import edu.nju.model.service.ChessBoardModelService;
@@ -117,19 +116,20 @@ public class ChessBoardModelImpl extends BaseModel implements ChessBoardModelSer
 		for(int i = 0 ; i<width; i++){
 			for (int j = 0 ; j< height; j++){
 				blockMatrix[i][j] = new BlockPO(i,j);
-			}
-		}
-		//放置雷，并设定block附近雷数，随机实现放置雷
-		while(mineNum > 0)
-		{
-			Random rd = new Random();
-			int i = rd.nextInt(width);
-			int j = rd.nextInt(height);
-			if(!blockMatrix[i][j].isMine())
-			{
-				blockMatrix[i][j].setMine(true);
-				blockMatrix[i][j].addMine();
-				mineNum--;
+				//放置雷，并设定block附近雷数，现有放置方法为固定方法，请添加随机实现
+				index ++;
+				if(index == 2){
+					if(mineNum>0){
+						if(i>3&&j>3){
+							blockMatrix[i-1][j-1].setMine(true);
+						
+							addMineNum(i-1,j-1);
+							mineNum--;
+						}
+					}
+					index = 0;
+				}
+				
 			}
 		}
 		
