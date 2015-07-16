@@ -122,7 +122,7 @@ public class ChessBoardModelImpl extends BaseModel implements ChessBoardModelSer
 			for(;tempJ<=y+1;tempJ++){
 				if((tempI>-1&&tempI<width)&&(tempJ>-1&&tempJ<height)){
 //					System.out.println(i+";"+j+":"+tempI+";"+tempJ+":");
-					if(blockMatrix[tempI][tempJ].getState() == BlockState.FLAG);
+					if(blockMatrix[tempI][tempJ].getState() == BlockState.FLAG)
 					{
 						flagNum++;
 					}
@@ -133,10 +133,15 @@ public class ChessBoardModelImpl extends BaseModel implements ChessBoardModelSer
 				}
 			}
 		}
+		logger.info("被标记的雷的数量和实际雷的数据分布为："+String.valueOf(flagNum)+","+String.valueOf(block.getMineNum()));
 		if(flagNum == block.getMineNum())
 		{
 			logger.info("符合快速挖雷的条件");
-			super.updateChange(new UpdateMessage("excute",this.getDisplayList(blocks, GameState.RUN)));
+			//逐个挖开
+			for(BlockPO tmpBlock: blocks)
+			{
+				excavate(tmpBlock.getX(), tmpBlock.getY());
+			}
 			return true;
 		}
 		else
