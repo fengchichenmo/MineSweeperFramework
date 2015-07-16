@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import edu.nju.model.po.BlockPO;
 import edu.nju.model.service.ChessBoardModelService;
 import edu.nju.model.service.GameModelService;
@@ -20,6 +23,8 @@ public class ChessBoardModelImpl extends BaseModel implements ChessBoardModelSer
 	
 	private BlockPO[][] blockMatrix;
 
+//	日志系统
+	private static   Logger logger = LogManager.getLogger(ChessBoardModelImpl.class);
 	
 	public ChessBoardModelImpl(ParameterModelService parameterModel){
 		this.parameterModel = parameterModel;
@@ -95,6 +100,7 @@ public class ChessBoardModelImpl extends BaseModel implements ChessBoardModelSer
 	@Override
 	public boolean quickExcavate(int x, int y) {
 		// TODO Auto-generated method stub
+		logger.info("快速挖开地雷");
 		/***********请在此处完成快速挖开方法实现****************/
 		if(blockMatrix == null)
 			return false;
@@ -129,6 +135,7 @@ public class ChessBoardModelImpl extends BaseModel implements ChessBoardModelSer
 		}
 		if(flagNum == block.getMineNum())
 		{
+			logger.info("符合快速挖雷的条件");
 			super.updateChange(new UpdateMessage("excute",this.getDisplayList(blocks, GameState.RUN)));
 			return true;
 		}

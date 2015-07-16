@@ -5,6 +5,11 @@
 package edu.nju.main;
 
  
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import edu.nju.config.InitLogger;
 import edu.nju.controller.impl.MenuControllerImpl;
 import edu.nju.controller.msgqueue.OperationQueue;
 import edu.nju.controller.service.MenuControllerService;
@@ -17,7 +22,13 @@ import edu.nju.view.MainFrame;
 public class JMineSweeper {
 
 	static MenuControllerService menuController = new MenuControllerImpl();
+	
+	private static   Logger logger = LogManager.getLogger(JMineSweeper.class);
+	
 	public static void main(String[] args) {
+		
+		InitLogger.init();
+		logger.info("游戏启动开始");
 		
 		MainFrame ui = new MainFrame();
 		StatisticModelImpl statisticModel = new StatisticModelImpl();
