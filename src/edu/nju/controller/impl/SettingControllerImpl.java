@@ -6,11 +6,11 @@ import edu.nju.controller.service.SettingControllerService;
 import edu.nju.model.service.GameModelService;
 
 public class SettingControllerImpl implements SettingControllerService{
-	GameModelService game = OperationQueue.getGameModel();
+	
 	@Override
 	public boolean setEasyGameLevel() {
 		// TODO Auto-generated method stub
-		
+		GameModelService game = OperationQueue.getGameModel();
 		game.setGameLevel("小");
 		game.startGame();
 		
@@ -20,6 +20,7 @@ public class SettingControllerImpl implements SettingControllerService{
 	@Override
 	public boolean setHardGameLevel() {
 		// TODO Auto-generated method stub
+		GameModelService game = OperationQueue.getGameModel();
 		game.setGameLevel("中");
 		game.startGame();
 		
@@ -29,6 +30,7 @@ public class SettingControllerImpl implements SettingControllerService{
 	@Override
 	public boolean setHellGameLevel() {
 		// TODO Auto-generated method stub
+		GameModelService game = OperationQueue.getGameModel();
 		game.setGameLevel("大");
 		game.startGame();
 		return true;
@@ -37,7 +39,8 @@ public class SettingControllerImpl implements SettingControllerService{
 	@Override
 	public boolean setCustomizedGameLevel(int height, int width, int nums) {
 		// TODO Auto-generated method stub
-		game.setGameSize(width, height, nums);
+		GameModelService game = OperationQueue.getGameModel();
+		game.setGameSize(height, width, nums);
 		game.startGame();
 		return true;
 	}

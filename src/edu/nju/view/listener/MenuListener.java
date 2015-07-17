@@ -49,7 +49,15 @@ public class MenuListener implements ActionListener{
 			
 		} else if (e.getSource() == ui.getMenuItem("custom")) {//生成定制游戏，需要向controller传递棋盘的高、宽和雷数
 			
-			
+			CustomDialog cd = new CustomDialog(ui.getMainFrame(),
+					ui.getMineBoard().getRows(),
+					ui.getMineBoard().getColumns(),
+					Integer.parseInt(ui.getMineNumberLabel().getText()));
+			cd.show();
+			if(cd.getOk())
+			{
+				settingController.setCustomizedGameLevel(cd.getHeight(), cd.getWidth(), cd.getMineNumber());
+			}
 			
 		} else if (e.getSource() == ui.getMenuItem("exit")) {
 			System.exit(0);

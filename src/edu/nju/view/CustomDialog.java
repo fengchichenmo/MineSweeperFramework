@@ -86,6 +86,15 @@ public class CustomDialog {
 
 		dialog.setContentPane(panel);
 		this.parent = parent;
+		
+		//设置dialog的大小和位置
+		/*
+		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit()
+				.getScreenSize();
+				dialog.setSize(200,120 );
+				dialog.setLocation((screenSize.width - parent.getWidth())/2, (screenSize.height - parent.getHeight())/2);
+		dialog.setVisible(true);
+		*/
 	}
 	
 	
@@ -153,6 +162,15 @@ public class CustomDialog {
 
 		dialog.setContentPane(panel);
 		this.parent = parent;
+		
+		//设置dialog的大小和位置
+		/*
+		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit()
+				.getScreenSize();
+				dialog.setSize(240,180);
+				dialog.setLocation((screenSize.width - parent.getWidth())/2, (screenSize.height - parent.getHeight())/2);
+		dialog.setVisible(true);
+		*/
 	}
 
 	public boolean show() {
@@ -163,6 +181,10 @@ public class CustomDialog {
 		return ok;
 	}
 
+	public boolean getOk()
+	{
+		return ok;
+	}
 	public int getWidth() {
 		return width;
 	}

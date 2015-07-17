@@ -101,6 +101,9 @@ public class GameModelImpl extends BaseModel implements GameModelService{
 		this.width = width;
 		this.height = height;
 		this.mineNum = mineNum;
+		//增加自定义游戏级别
+		setGameLevel("自定义");
+		levelList.add(new GameLevel(3,"自定义",height,width,mineNum));
 		return true;
 	}
 	
