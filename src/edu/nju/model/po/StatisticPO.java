@@ -8,7 +8,7 @@ public class StatisticPO {
 	private int level;
 	private int width;
 	private int height;
-	
+	public static final int dataNumber = 6;
 	public StatisticPO() {
 		super();
 	}
@@ -70,6 +70,10 @@ public class StatisticPO {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+	public String toString()
+	{
+		return winrate+" "+wins+" "+sum+" "+level+" "+width+" "+height;
 	}
 	
 }

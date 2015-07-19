@@ -87,7 +87,7 @@ public class CustomDialog {
 		dialog.setContentPane(panel);
 		this.parent = parent;
 		
-		//设置dialog的大小和位置
+		//璁剧疆dialog鐨勫ぇ灏忓拰浣嶇疆
 		/*
 		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit()
 				.getScreenSize();
@@ -163,7 +163,7 @@ public class CustomDialog {
 		dialog.setContentPane(panel);
 		this.parent = parent;
 		
-		//设置dialog的大小和位置
+		//璁剧疆dialog鐨勫ぇ灏忓拰浣嶇疆
 		/*
 		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit()
 				.getScreenSize();

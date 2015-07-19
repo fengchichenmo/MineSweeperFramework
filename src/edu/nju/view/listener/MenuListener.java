@@ -6,6 +6,8 @@ package edu.nju.view.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -13,6 +15,8 @@ import edu.nju.controller.impl.MenuControllerImpl;
 import edu.nju.controller.impl.SettingControllerImpl;
 import edu.nju.controller.service.MenuControllerService;
 import edu.nju.controller.service.SettingControllerService;
+import edu.nju.model.data.StatisticData;
+import edu.nju.model.po.StatisticPO;
 import edu.nju.view.CustomDialog;
 import edu.nju.view.MainFrame;
 import edu.nju.view.RecordDialog;
@@ -62,6 +66,24 @@ public class MenuListener implements ActionListener{
 		} else if (e.getSource() == ui.getMenuItem("exit")) {
 			System.exit(0);
 		} else if (e.getSource() == ui.getMenuItem("record")) {//统计胜率信息
+			RecordDialog rd = new RecordDialog(ui.getMainFrame());
+			StatisticData sd = new StatisticData();
+			List<StatisticPO> list = sd.getStatistic();
+			if(list == null)
+			{
+				rd.show();
+			}
+			else
+			{
+				double[] score =  new double[list.size()];
+				int index = 0;
+				for(StatisticPO spo: list)
+				{
+					score[index] = spo.getWinrate();
+					index++;
+				}
+				rd.show(score);
+			}
 			
 		}else if(e.getSource() == ui.getMenuItem("host")){//注册成为主机
 			

@@ -28,7 +28,7 @@ public class RecordDialog {
 		initialization(parent);
 	}
 
-	public boolean show(String[] names, int[] score) {
+	public boolean show(String[] names, double[] score) {
 		clear = false;
 		this.names = names;
 		this.score = score;
@@ -37,9 +37,10 @@ public class RecordDialog {
 	}
 	
 	public void show(){
-		dialog.setVisible(true);
-		this.names = new String[]{"UnKnown","UnKnown","UnKnown"};
-		this.score = new int[]{999,999,999};
+		show(names,score);
+	}
+	public void show(double[] score)
+	{
 		show(names,score);
 	}
 
@@ -64,8 +65,8 @@ public class RecordDialog {
 				clear = true;
 				int length = names.length;
 				for (int i = 0; i != length; ++i) {
-					names[i] = "Unknow Name";
-					score[i] = 999;
+					names[i] = "UnKnown";
+					score[i] = 0.0;
 				}
 				textPanel.repaint();
 			}
@@ -111,7 +112,7 @@ public class RecordDialog {
 		}
 	}
 
-	private final String[] rank = { "Easy", "Hard", "Hell" };
+	private final String[] rank = { "Easy", "Hard", "Hell","custom" };
   	private JDialog dialog;
 
 	private JPanel panel;
@@ -122,9 +123,9 @@ public class RecordDialog {
 
 	private JSeparator line;
 
-	private String names[];
+	private String names[] = new String[]{"UnKnown","UnKnown","UnKnown","UnKnown"};;
 
-	private int score[];
+	private double score[] = new double[]{0.0,0.0,0.0,0.0};
 
 	private JPanel textPanel;
 
